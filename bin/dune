@@ -1,0 +1,4 @@
+(executable
+ (public_name scuttle)
+ (name main)
+ (libraries scuttle))
