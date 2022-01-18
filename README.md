@@ -37,6 +37,15 @@ The project was initialized with:
 
 $ dune init proj scuttle --inline-tests
 
+
+After the first couple commits, the opam switch environment was setup
+with:
+
+$ opam switch create . ocaml-base-compiler
+$ eval $(opam env)
+
+
+
 # Testing #
 
 You can run the unit tests from the command line with the following command.
