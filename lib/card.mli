@@ -1,7 +1,9 @@
+(* open Sexplib *)
+
 (** A module for working with playing cards *)
 module Card :
   sig
-    type card_suit = Clubs | Diamonds | Hearts | Spades
+    type card_suit = Clubs | Diamonds | Hearts | Spades [@@deriving compare, sexp]
     (** card_suit represents the suit of a card *)
 
     type card_rank =
@@ -17,12 +19,12 @@ module Card :
       | Seven
       | Eight
       | Nine
-      | Ten
+      | Ten [@@deriving compare, sexp]
     (** card_rank represents the rank of a card
         The card_rank type is independent of the "value" of the card
         when there is no game context *)
 
-    type card = { suit : card_suit; rank : card_rank; }
+    type card = { suit : card_suit; rank : card_rank; } [@@deriving compare, sexp]
     (** A card is a record of a card_suit and card_rank *)
 
     val card_suit_to_str : card_suit -> string

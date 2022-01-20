@@ -1,4 +1,11 @@
-(test
- (name test)
- (libraries scuttle)
- (modes byte))
+(library
+ (inline_tests)
+ (name scuttle_tests)
+ (libraries
+   scuttle
+   ppx_expect.common
+   ppx_expect.config
+   ppx_inline_test.config
+   ppx_inline_test.runtime-lib)
+ (modes byte)
+ (preprocess (pps ppx_assert ppx_expect ppx_inline_test ppx_sexp_conv)))
