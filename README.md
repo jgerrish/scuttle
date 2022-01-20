@@ -61,6 +61,12 @@ The custom testing library is roughly based on the interface of the
 OUnit library.  It is a much more complete and better designed
 implementation of unit testing than what is included here.
 
+# Developer Log #
+
+A developer log is included in dev-log.org.  This includes
+step-by-step instructions on how the project was built.  It also
+includes issues I encountered and solutions I found.
+
 
 # Useful Resources #
 

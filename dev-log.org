@@ -1,0 +1,54 @@
+<2022-01-17 Mon>
+
+Issues were encountered using ocamlyacc, the default compiler-compiler
+included with the OCaml distribution.  The automatically generated mli
+interface file doesn't include the open calls specified in the mly
+file.
+
+Before moving fully to menhir, dune and opam, I wanted to get a basic
+application working with as few dependencies as possible.
+
+Instructions are included in the lib directory dune file on a
+workaround to the issue without moving to opam or menhir.
+
+
+<2022-01-19 Wed>
+
+branch ppx_tests was added to test working with PPX rewriters.
+
+The following depends were added to dune-project:
+
+  (ppx_expect (and (>= 0.14.2) :with-test))
+  (ppx_assert (>= 0.14.0))
+  (ppx_compare (>= 0.14.0))
+  (ppx_inline_test (>= 0.14.1))
+  (ppx_sexp_conv (>= 0.14.3))
+
+After this, deriving macros were attached to types in the Card module:
+[@@deriving compare, sexp]
+
+Then libraries sexplib, ppx_sexp_conv, and ppx_compare were added to
+libraries in lib/dune and preprocess directives were added to the same
+file.
+
+With these additions, to_sexp s-expression functions were created
+automatically for the card_suit, card_rank and card types.  In
+addition, equality comparison operators were created.
+
+These allowed us to define %test_unit bindings in the main library.
+These are run automatically on "dune runtest".
+
+byte-code mode is incompatible with the automatic test runner
+executable, you need to use native mode or customize the build.
+
+Removing (modes byte) from my test library dune file fixed the issue
+in this case.
+
+<2022-01-19 Wed>
+
+and clauses were not working to restrict versions in s-expressions in
+my depends in dune-project
+
+Removing them fixed my problem.  It's not an ideal situation since
+most of the projects use semantic versioning and upgrading major
+versions may introduce breaking changes.
