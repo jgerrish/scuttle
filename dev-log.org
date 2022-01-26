@@ -1,0 +1,13 @@
+<2022-01-25 Tue>
+
+Started adding a new AddPlayer command to the GameEngine.
+
+The first step in the is adding a Player module to encapsulate a
+player type and the functions that operate on that type.
+
+More tests were added for the Player module, along with examples of
+how to use it.
+
+Next, we'll add a PlayerSet module instead of using a list to store
+players in the game data structure.  Then functions will be added to
+Game and Game_engine to let us add players to games.

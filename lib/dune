@@ -1,7 +1,7 @@
 (library
  (name scuttle)
  (public_name scuttle)
- (modules card deck game game_engine parser lexer))
+ (modules card deck player game game_engine parser lexer))
 
 (ocamllex lexer)
 
