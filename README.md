@@ -4,6 +4,12 @@ This application is a game engine for card games.
 
 It's written in OCaml and includes a DSL for defining card games.
 
+The project is not intended to be a complete game engine to replace
+full-fledged game engines.  It provides a collection of examples of
+OCaml features and practices as both a review for myself and quick
+reference for others.  The dev-log.org file provides an overview of
+features as they are added to the system.  Some of the earlier entries
+are back-dated.
 
 The game engine is in progress.  Currently, only building a standard deck
 and removing a suit from a deck with the parser is possible.

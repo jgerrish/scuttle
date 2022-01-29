@@ -6,8 +6,90 @@ The first step in the is adding a Player module to encapsulate a
 player type and the functions that operate on that type.
 
 More tests were added for the Player module, along with examples of
-how to use it.
+how to use it.  We'll start adding more comprehensive tests for all of the
+new code as we write it.
 
 Next, we'll add a PlayerSet module instead of using a list to store
 players in the game data structure.  Then functions will be added to
 Game and Game_engine to let us add players to games.
+
+
+<2022-01-29 Sat>
+
+Today we're adding a data structure to hold collections of players.
+Right now, we're using lists to store data in the Game type.  Lists
+are convenient for easily working with, but updating and finding
+individual items in a list is inefficient.  In addition, lists don't
+provide built-in support for holding unique objects.
+
+To support collections of players, we'll use a data set called a set.
+Set's are like lists, but hold only one copy of an item.  If you
+attempt to add a second copy of the same item, it won't be added (or
+some possible different set type implementations may replace the
+item).  The OCaml implementation of set, Set, leaves the set unchanged
+if you attempt to add the item a second time.
+
+* Unique IDs and Closures
+
+But players can have the same name, and we to support having multiple
+players with the same name in a game.  So we'll add a new component to
+the Player type t.  We'll add an id that is unique for each player.
+
+How do we generate unique IDs?  GUIDs are one possibility, and if we
+add serialization and saving games down the line we may add it, but
+for now we'll start with a simpler incrementing ID.  This also
+introduces the idea of closures.
+
+To implement the ID, we'll add modify our underlying Player type.
+Right now it's a string, we'll change it to an id and string tuple
+(int * str).  This is simple and works for now, but we'll probably
+move to a record like our card type later.  Writing the card type as a
+record was a missed opportunity to show how OCaml supports fast and
+iteratives data design.
+
+Next we'll modify the compare function to only compare the unique ID.
+If if two players have the same name, they will always have different
+IDs.  We'll switch to Stdlib.compare on the first tuple value.  Having
+a custom compare type included in our module helps decouple
+information in our program, making updates easier.
+
+Next we'll modify the create function in Player.  Every time we call
+that function, we want a new unique id generated.
+
+To do this, we create a generator function, player_id_generator, that
+is a closure.  This closure updates a variable in place and returns
+that variable every time it is called.  The closure captures the
+environment that includes that variable and the code.
+
+To store our id, we create a new reference to a value and use
+reference assignment (:=) to update the underlying value of the id.
+Referenced values are mutable and can be modified.
+
+This function now has a side-effect, as opposed to being a pure
+function.  A pure function will always return the same value for a
+given input.  A function with side-effects may return different values
+for a given input.  Functions with side effects are more difficult to
+reason about, but they can be more convenient to work with.
+
+The book Developing Applications With Objective Caml, available at
+https://caml.inria.fr/pub/docs/oreilly-book/, provides more
+information on references and closures, including an example similar
+to this.
+
+* The tests
+
+The test_playerSet.ml file contains tests to see if the data structure
+correctly stores and retrieves players.
+
+We used a new lambda syntax. Instead of the equality implementation
+type we used in the deck.ml compartor function in remove_card, we used
+the fun keyword. The fun keyword lets you build a lambda function
+inline, this is opposed to the keyword function syntax used in the
+comparator.
+
+* The filenames
+
+I switched to using camelCase for the PlayerSet module.  Instead of an
+underscore in the name it seemed more idiomatic to OCaml, even if the
+filename looks weird.  The rest of the filenames should be updated as
+work continues on them.

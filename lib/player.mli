@@ -6,11 +6,13 @@
  *)
 module Player :
 sig
-  type t = string
+  type t = int * string
+  (* type t = string *)
   (** [t] The player data type is just a string player name *)
 
   val create : string -> t
   (** [create name] Create a new player with the given name
+      This creates a new unique id for the player
       Returns the player as a string
 
       Example:
@@ -21,9 +23,8 @@ sig
   val compare : t -> t -> int
   (** [compare] Compare two players
       Return zero if they are equal, non-zero if they are not
-      The compare uses lexiocographical order, so it returns -1 if the first
-      player is "less" than the second player, +1 if player1 is "greater" than
-      the second player
+      Return zero if they are equal, non-zero if they are not
+      The compare uses unique id
 
       Example:
 
