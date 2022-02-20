@@ -16,10 +16,14 @@
 %type <Game_engine.game_command> toplevel
 %%
 
+// TODO: Figure out a way to pass arguments to the parser
+// Have the parser return a first-order function that takes an argument,
+// the current game object
 toplevel:
   | command SEMICOLON2       { $1 }
 ;
 
+// TODO: Add an ADDPLAYER command
 command:
   | BUILDDECK deck           { (BuildDeck $2) }
 ;

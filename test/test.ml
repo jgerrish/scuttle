@@ -3,6 +3,7 @@ open Test_card
 open Test_deck
 open Test_player
 open Test_playerSet
+open Test_game
 open Test_game_engine
 open Test_parser
 
@@ -24,6 +25,7 @@ let suite =
        Test_playerSet.test_playerSet_make_with_two_with_same_name);
       ("test_playerSet_make_with_two_with_same_name_and_same_id",
        Test_playerSet.test_playerSet_make_with_two_with_same_name_and_same_id);
+      ("test_game_t", Test_game.test_game_t);
       ("test_game_engine_builddeck_standard",
        Test_game_engine.test_game_engine_builddeck_standard);
       ("test_game_engine_builddeck_standard_minus_suit_card",

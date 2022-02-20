@@ -22,13 +22,13 @@ module Game_engine :
     val game_commands_to_str : game_commands -> string
     (** [game_commands_to_str game_commands] Convert game_commands to a string *)
 
-    val eval_deck : deck_command -> Deck.deck
+    val eval_deck : deck_command -> Deck.t
     (** [eval_deck deck_command] Evaluate a deck_command, returning a deck of cards *)
 
-    val eval : game_command -> Game.game
+    val eval : game_command -> Game.t
     (** [eval game_command] Evaluate a game_command, returning a game *)
 
-    val eval_commands : game_commands -> Game.game
+    val eval_commands : game_commands -> Game.t
     (** [eval_commands game_commands] Evaluate a list of game commands, returning
         a game *)
 

@@ -1,8 +1,5 @@
-(**
-   A basic unit testing module.
-   Modeled on the oUnit2 testing framework.
- *)
-
+(** A basic unit testing module.
+    Modeled on the oUnit2 testing framework. *)
 module Tester =
   struct
     (** Exception type for unit test failures *)

@@ -3,8 +3,8 @@ opam-version: "2.0"
 version: "1.0.0"
 synopsis: "scuttle card game engine"
 description: "scuttle card game engine"
-maintainer: ["jgerrish@gmail.com"]
-authors: ["Joshua Gerrish"]
+maintainer: ["Joshua Gerrish <jgerrish@gmail.com>"]
+authors: ["Joshua Gerrish <jgerrish@gmail.com>"]
 license: "MIT"
 homepage: "https://github.com/jgerrish/scuttle"
 bug-reports: "https://github.com/jgerrish/scuttle/issues"

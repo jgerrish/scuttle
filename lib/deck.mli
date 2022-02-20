@@ -4,7 +4,7 @@ open Card
     decks of playing cards. *)
 module Deck :
   sig
-    type deck = Card.card list
+    type t = Card.card list
     (** A deck of cards *)
 
     (** These are internal functions, but for testing include them here *)
@@ -22,22 +22,22 @@ module Deck :
 
     (** These are public functions *)
     
-    val shuffle : deck -> deck
+    val shuffle : t -> t
     (** [shuffle deck] Shuffle a deck of cards *)
 
-    val remove_card : deck -> Card.card -> deck
+    val remove_card : t -> Card.card -> t
     (** [remove_card deck card] Remove a single card from the deck *)
 
-    val remove_single_card_suit : deck -> Card.card_suit -> deck
+    val remove_single_card_suit : t -> Card.card_suit -> t
     (** [remove_single_card_suit deck suit] Remove a single random card
         of a given suit from a deck *)
 
-    val generate_standard_deck : deck
+    val generate_standard_deck : t
     (** [generate_standard_deck] Generate a standard deck *)
 
-    val deck_to_str : deck -> string
+    val deck_to_str : t -> string
     (** [deck_to_str deck] Convert a deck to a string *)
 
-    val standard_deck : deck
+    val standard_deck : t
     (** [standard_deck] A standard deck of cards *)
   end

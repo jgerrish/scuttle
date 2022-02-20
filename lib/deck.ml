@@ -5,7 +5,7 @@ open Card
 module Deck =
   struct
     (** A deck of cards *)
-    type deck = Card.card list
+    type t = Card.card list
 
     (** [array_swap arr index1 index2]
         Swap elements at position index1 and index2 in Array array *)
@@ -32,7 +32,7 @@ module Deck =
       array_swap arr (fst pair) (snd pair)
 
     (** [shuffle card_deck] Shuffle a deck of cards *)
-    let shuffle (card_deck: deck) : deck =
+    let shuffle (card_deck: t) : t =
       Random.self_init ();
       let deck_array = Array.of_list card_deck in
       let swap_pairs = swap_pairs (List.length card_deck) in
@@ -40,7 +40,7 @@ module Deck =
 
     (* Inefficient, but for now it works *)
     (** [remove_card deck card] Remove a single card from the deck *)
-    let remove_card (card_deck: deck) card : deck =
+    let remove_card (card_deck: t) card : t =
       (* Use structural equality
          structural equality (=) tests two values by comparing them, possibly
          doing a "deep" comparison by comparing all of their children elements.
@@ -60,7 +60,7 @@ module Deck =
 
     (** [remove_single_card_suit deck suit] Remove a single random card
         of a given suit from a deck *)
-    let remove_single_card_suit (card_deck: deck) (card_suit: Card.card_suit) : deck =
+    let remove_single_card_suit (card_deck: t) (card_suit: Card.card_suit) : t =
       (* Find all cards of the given suit in the deck *)
       let comparator s (c : Card.card) = (s = c.suit) in
       let cards_with_suit = List.filter (comparator card_suit) card_deck in

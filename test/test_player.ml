@@ -6,18 +6,21 @@ module Test_player =
     (** [test_player_create] Test the Player.create function *)
     let test_player_create =
       let player = Player.create("test_player_name") in
-      Tester.assert_equal (=) player (0, "test_player_name")
+      Tester.assert_equal (=) player (2, "test_player_name")
 
     (** [test_player_create_two] Test creating two players with the same name *)
     (* Test ordering is explicitly laid out in the test.ml testrunner *)
     (* This introduces a dependency between the individual tests and the suite,
        which is not ideal
-       TODO: Perhaps reset the id or rewrite the test runner *)
+       TODO: Reset the id in each test module
+       These functions are partially evaluted before the tests are run
+       Or they are run out-of-order (possibly alphabetical,
+       since test_game appears to be run first *)
     let test_player_create_two =
       let player1 = Player.create("test_player_name") in
       let player2 = Player.create("test_player_name") in
-      Tester.assert_equal (=) player1 (1, "test_player_name");
-      Tester.assert_equal (=) player2 (2, "test_player_name")
+      Tester.assert_equal (=) player1 (3, "test_player_name");
+      Tester.assert_equal (=) player2 (4, "test_player_name")
 
     (** [test_player_compare_equal] Test comparing the same player *)
     let test_player_compare_equal =

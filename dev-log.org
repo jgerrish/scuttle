@@ -93,3 +93,19 @@ I switched to using camelCase for the PlayerSet module.  Instead of an
 underscore in the name it seemed more idiomatic to OCaml, even if the
 filename looks weird.  The rest of the filenames should be updated as
 work continues on them.
+
+<2022-02-20 Sun>
+
+Add more comprehensive tests before we start development on the rest
+of the Player and PlayerSet code.
+We're going to add tests around the Game module.
+
+First, we'll refactor Game to have a primary type identified by
+type t.  This is a coding style followed by the OCaml community.
+
+This just involves renaming type game to type t and updating code that
+references type game in Game_engine and elsewhere.
+
+We'll also refactor Deck to have a primary type of t.
+
+Then we created a simple test to test creating a Game.t type

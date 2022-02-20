@@ -10,6 +10,9 @@ sig
   (* type t = string *)
   (** [t] The player data type is just a string player name *)
 
+  val player_to_str : t -> string
+  (** [player_to_str player] Convert a player to a string *)
+
   val create : string -> t
   (** [create name] Create a new player with the given name
       This creates a new unique id for the player

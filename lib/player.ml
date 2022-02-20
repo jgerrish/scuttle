@@ -12,6 +12,9 @@ module Player =
     (* type t = string *)
 
 
+    let player_to_str (player : t) =
+      String.concat (Int.to_string (fst player)) [": "; (snd player)]
+
     (** [player_id_generator]
         player_id_generator is a private function that is used to generate
         unique IDs for the create function.

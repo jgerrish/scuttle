@@ -46,24 +46,24 @@ module Game_engine =
       String.concat ", " (List.map game_command_to_str commands)
 
     (** [eval_deck deck_command] Evaluate a deck_command, returning a deck of cards *)
-    let rec eval_deck deck_command : Deck.deck =
+    let rec eval_deck deck_command : Deck.t =
       match deck_command with
         Standard -> Deck.standard_deck
       | Remove (card_suit, deck) ->
          Deck.remove_single_card_suit (eval_deck deck) card_suit
 
     (** [eval game_command] Evaluate a game_command, returning a game *)
-    let eval (game : game_command) : Game.game =
+    let eval (game : game_command) : Game.t =
       match game with
-        [] -> ([] : Game.game)
-      | BuildDeck (deck_def) -> ([(Game.Deck (eval_deck deck_def))] : Game.game)
+        [] -> ([] : Game.t)
+      | BuildDeck (deck_def) -> ([(Game.Deck (eval_deck deck_def))] : Game.t)
 
     (** [eval_commands game_commands] Evaluate a list of game commands, returning
         a game *)
-    let rec eval_commands (commands : game_commands) : Game.game =
+    let rec eval_commands (commands : game_commands) : Game.t =
       Printf.printf "Parsing eval_commands\n";
       match commands with
-        [] -> ([] : Game.game)
+        [] -> ([] : Game.t)
       | x::xs -> (eval x) @ (eval_commands xs)
 
     (*
