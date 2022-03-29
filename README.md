@@ -12,11 +12,11 @@ and removing a suit from a deck with the parser is possible.
 
 To compile run make in the root directory:
 
-$ make
+$ dune build
 
 You can then run the game engine interpreter like this:
 
-$ src/scuttle
+$ dune exec bin/main.exe
 
 Right now, only building a basic standard deck works, try typing the following
 at the prompt:

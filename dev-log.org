@@ -1,0 +1,19 @@
+<2022-03-29 Tue>
+
+To fix issues with Unbound module errors in the parser.mly file,
+we moved to using menhir as a parser generator.
+
+Using menhir removes the need to use Makefile to patch the generated
+interface file.
+
+Unfortunately, there are still issues with Unbound module errors if we
+don't generate separate libraries.  So the parser was moved into a
+separate library.
+
+The parser is the highest-level API available currently.  The core
+scuttle library that includes Card, Deck, etc. may be refactored to
+ScuttleCore and a new interface provided for toplevel in the Scuttle
+library.
+
+Currently, no additional features of menhir are used, but make is
+no longer needed and builds shouldn't fail on a fresh opam install.

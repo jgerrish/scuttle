@@ -1,33 +1,19 @@
 (library
  (name scuttle)
  (public_name scuttle)
- (modules card deck game game_engine parser lexer))
+ (modules card deck game game_engine))
+
+; We need the parser in a separate package or library
+; otherwise we get the following error:
+;; Error: Unbound module GameEngine.GameEngine
+(library
+ (name scuttleParser)
+ ;; This installs into the scuttle/parser directory
+ (public_name scuttle.parser)
+ (modules lexer parser)
+ (libraries scuttle))
 
 (ocamllex lexer)
 
-;; Using ocamlyacc alone doesn't work
-;; ocamlyacc generates a mli file along with a ml file
-;; The mli file needs an "open Game_engine" at the top, or the
-;; start rule fails because Game_engine.game_command generates an Unbound
-;; type constructor error:
-;; Error: Unbound type constructor Game_engine.game_command
-;; So, we patch in the header from the patches directory
-;;
-;; This is accomplished with a small Makefile to deal with the ocamlyacc
-;; output
-;; The Makefile generates tmp_parser.ml and tmp_parser.mli
-;; Dune conveniently discards these since they're not specified as targets
-
-;; (ocamlyacc parser)
-
-(rule
- (targets parser.ml)
- (deps    parser.mly)
- (action  (chdir %{workspace_root}
-           (run make parser.ml))))
-
-(rule
- (targets parser.mli)
- (deps    parser.mly)
- (action  (chdir %{workspace_root}
-           (run make parser.mli))))
+(menhir
+ (modules parser))

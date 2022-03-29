@@ -2,8 +2,8 @@ open Tester
 open Scuttle__Card
 open Scuttle__Deck
 open Scuttle__Game_engine
-open Scuttle__Lexer
-open Scuttle__Parser
+open ScuttleParser__Lexer
+open ScuttleParser__Parser
 
 module Test_parser =
   struct

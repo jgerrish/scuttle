@@ -1,7 +1,7 @@
 open Scuttle.Game
 open Scuttle.Game_engine
-open Scuttle.Parser
-open Scuttle.Lexer
+open ScuttleParser.Parser
+open ScuttleParser.Lexer
 
 (** [parse] The main parser *)
 let parse () =
