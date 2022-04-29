@@ -1,4 +1,6 @@
 %{
+    open Scuttle
+    open Card
     open Game_engine
 %}
 
@@ -25,19 +27,19 @@ toplevel:
 
 // TODO: Add an ADDPLAYER command
 command:
-  | BUILDDECK deck           { (BuildDeck $2) }
+  | BUILDDECK deck           { (Game_engine.BuildDeck $2) }
 ;
 
 deck:
-  | STANDARD                 { (Standard) }
-  | deck REMOVE suit         { (Remove($3, $1)) }
+  | STANDARD                 { (Game_engine.Standard) }
+  | deck REMOVE suit         { (Game_engine.Remove($3, $1)) }
 ;
 
 suit:
-  | CLUBS                    { Clubs }
-  | DIAMONDS                 { Diamonds }
-  | HEARTS                   { Hearts }
-  | SPADES                   { Spades }
+  | CLUBS                    { Card.Clubs }
+  | DIAMONDS                 { Card.Diamonds }
+  | HEARTS                   { Card.Hearts }
+  | SPADES                   { Card.Spades }
 ;
 
 %%

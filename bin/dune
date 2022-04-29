@@ -1,4 +1,5 @@
 (executable
  (public_name scuttle)
+ (package scuttle)
  (name main)
- (libraries scuttle))
+ (libraries scuttle scuttleParser))
