@@ -1,7 +1,17 @@
 (library
  (name scuttle)
  (public_name scuttle)
- (modules card deck player playerSet game game_engine parser lexer))
+ (modules card deck player playerSet game game_engine))
+
+; We need the parser in a separate package or library
+; otherwise we get the following error:
+;; Error: Unbound module GameEngine.GameEngine
+(library
+ (name scuttleParser)
+ ;; This installs into the scuttle/parser directory
+ (public_name scuttle.parser)
+ (modules lexer parser)
+ (libraries scuttle))
 
 (ocamllex lexer)
 
