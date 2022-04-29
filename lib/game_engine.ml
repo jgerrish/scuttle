@@ -8,6 +8,8 @@
  *)
 open Card
 open Deck
+open Player
+open PlayerSet
 open Game
 
 module Game_engine =
@@ -30,6 +32,7 @@ module Game_engine =
     type game_command =
       | []
       | BuildDeck of deck_command
+      | AddPlayer of Player.t
 
     (** [game_command_to_str game_command] Convert a game_command to a string *)
     let game_command_to_str command =
@@ -37,7 +40,8 @@ module Game_engine =
       | [] -> ""
       (* ^ is string concatenation *)
       | BuildDeck (deck) -> "builddeck " ^ (deck_command_to_str deck)
-    
+      | AddPlayer (player) -> "addplayer " ^ (Player.player_to_str player)
+
     (** [game_commands] A list of game commands *)
     type game_commands = game_command list
 
@@ -53,18 +57,25 @@ module Game_engine =
          Deck.remove_single_card_suit (eval_deck deck) card_suit
 
     (** [eval game_command] Evaluate a game_command, returning a game *)
-    let eval (game : game_command) : Game.t =
+    let eval (game : game_command) (current_game : Game.t) : Game.t =
       match game with
-        [] -> ([] : Game.t)
-      | BuildDeck (deck_def) -> ([(Game.Deck (eval_deck deck_def))] : Game.t)
+        [] -> current_game
+      | BuildDeck (deck_def) ->
+         ({ Game.deck = (eval_deck deck_def);
+            Game.players = current_game.players } : Game.t)
+      | AddPlayer (player) ->
+         { Game.deck = current_game.deck;
+           Game.players = PlayerSet.add player current_game.players }
 
     (** [eval_commands game_commands] Evaluate a list of game commands, returning
         a game *)
-    let rec eval_commands (commands : game_commands) : Game.t =
+    let rec eval_commands
+              (commands : game_commands)
+              (current_game : Game.t) : Game.t =
       Printf.printf "Parsing eval_commands\n";
       match commands with
-        [] -> ([] : Game.t)
-      | x::xs -> (eval x) @ (eval_commands xs)
+        [] -> current_game
+      | x::xs -> (eval_commands xs (eval x current_game))
 
     (*
     type shuffle =

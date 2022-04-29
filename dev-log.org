@@ -129,3 +129,18 @@ library.
 
 Currently, no additional features of menhir are used, but make is
 no longer needed and builds shouldn't fail on a fresh opam install.
+
+<2022-04-29 Fri>
+
+Today we modified a Game to use a record type instead of a list.  This
+lets us access fields of a Game directly, so we can update individual
+fields when we parse and evaluate a command.
+
+In addition, the eval functions were modified to take an additional
+argument: an existing Game.  Now we can add a player to an existing
+game for example.
+
+The Game type was also simplified, it no longer has a game_element
+type, instead relying on the underlying types of Deck.t and
+PlayerSet.t.
+

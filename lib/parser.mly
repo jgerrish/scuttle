@@ -28,6 +28,7 @@ toplevel:
 // TODO: Add an ADDPLAYER command
 command:
   | BUILDDECK deck           { (Game_engine.BuildDeck $2) }
+//  | ADDPLAYER name           { (Game_engine.
 ;
 
 deck:

@@ -1,5 +1,6 @@
 open Card
 open Deck
+open Player
 open Game
 
 module Game_engine :
@@ -10,7 +11,7 @@ module Game_engine :
     val deck_command_to_str : deck_command -> string
     (** [deck_command_to_str deck_command] Convert a deck_command to a string *)
 
-    type game_command = [] | BuildDeck of deck_command
+    type game_command = [] | BuildDeck of deck_command | AddPlayer of Player.t
     (** [game_command] Commands that are used to build games *)
 
     val game_command_to_str : game_command -> string
@@ -25,10 +26,10 @@ module Game_engine :
     val eval_deck : deck_command -> Deck.t
     (** [eval_deck deck_command] Evaluate a deck_command, returning a deck of cards *)
 
-    val eval : game_command -> Game.t
+    val eval : game_command -> Game.t -> Game.t
     (** [eval game_command] Evaluate a game_command, returning a game *)
 
-    val eval_commands : game_commands -> Game.t
+    val eval_commands : game_commands -> Game.t -> Game.t
     (** [eval_commands game_commands] Evaluate a list of game commands, returning
         a game *)
 

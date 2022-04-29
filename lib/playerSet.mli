@@ -12,4 +12,6 @@ module PlayerSet :
     val add : elt -> t -> t
     val cardinal : t -> int
     val elements : t -> elt list
+
+    val player_set_to_str : t -> string
   end
