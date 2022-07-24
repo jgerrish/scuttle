@@ -6,6 +6,7 @@
 
 %token EOL
 %token BUILDDECK
+%token SHUFFLE
 %token STANDARD
 %token REMOVE
 %token CLUBS
@@ -29,6 +30,7 @@ command:
 deck:
   | STANDARD                 { (Game_engine.Standard) }
   | deck REMOVE suit         { (Game_engine.Remove($3, $1)) }
+  | deck SHUFFLE             { (Game_engine.Shuffle($1)) }
 ;
 
 suit:

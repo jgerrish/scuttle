@@ -16,6 +16,7 @@ module Game_engine =
     type deck_command =
       | Standard
       | Remove of Card.card_suit * deck_command
+      | Shuffle of deck_command
 
     (** [deck_command_to_str deck_command] Convert a deck_command to a string *)
     let rec deck_command_to_str card_deck =
@@ -25,6 +26,7 @@ module Game_engine =
          "remove "
          ^ (Card.card_suit_to_str card_suit)
          ^ (deck_command_to_str deck)
+      | Shuffle (deck) -> "shuffle " ^ (deck_command_to_str deck)
 
     (** [game_command] Commands that are used to build games *)
     type game_command =
@@ -37,6 +39,8 @@ module Game_engine =
       | [] -> ""
       (* ^ is string concatenation *)
       | BuildDeck (deck) -> "builddeck " ^ (deck_command_to_str deck)
+      (* | Shuffle (deck) -> "shuffle " *)
+      (*    ^ (deck_command_to_str deck) *)
     
     (** [game_commands] A list of game commands *)
     type game_commands = game_command list
@@ -51,6 +55,8 @@ module Game_engine =
         Standard -> Deck.standard_deck
       | Remove (card_suit, deck) ->
          Deck.remove_single_card_suit (eval_deck deck) card_suit
+      | Shuffle (deck) ->
+         Deck.shuffle (eval_deck deck)
 
     (** [eval game_command] Evaluate a game_command, returning a game *)
     let eval (game : game_command) : Game.game =
@@ -67,6 +73,7 @@ module Game_engine =
       | x::xs -> (eval x) @ (eval_commands xs)
 
     (*
+    (** [shuffle] The type of shuffle to use on the deck *)
     type shuffle =
       (* A random shuffle *)
       | Random

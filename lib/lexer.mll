@@ -10,6 +10,7 @@ rule token = parse
     (* | '\n'                  { EOL } *)
   | [' ' '\t']            { token lexbuf }
   | "builddeck"           { BUILDDECK }
+  | "shuffle"             { SHUFFLE }
   | "standard"            { STANDARD }
   | "remove"              { REMOVE }
   | "clubs"               { CLUBS }

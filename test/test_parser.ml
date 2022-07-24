@@ -27,4 +27,15 @@ module Test_parser =
          let clubs_filter (card : Card.card) = (card.suit = Card.Clubs) in
          Tester.assert_equal (=) (List.length (List.filter clubs_filter x)) 12
       | Players _ -> Tester.assert_failure "Expected deck"
+
+    (** [test_parser_builddeck_standard_shuffle]
+        Test building a standard deck and shuffle *)
+    let test_parser_builddeck_standard_shuffle =
+      let lexbuf = Lexing.from_string "builddeck standard shuffle;;" in
+      let game = Game_engine.eval (toplevel token lexbuf) in
+      match (List.hd game) with
+        Deck x ->
+         Tester.assert_equal (=) (List.length x) 52
+      | Players _ -> Tester.assert_failure "Expected deck"
+
   end

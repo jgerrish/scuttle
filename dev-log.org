@@ -17,3 +17,13 @@ library.
 
 Currently, no additional features of menhir are used, but make is
 no longer needed and builds shouldn't fail on a fresh opam install.
+
+<2022-07-24 Sun>
+
+We already had a shuffle function in the Deck module, this adds a
+shuffle command to the language.  This was implemented in the game
+engine, parser.  A basic test was added.
+
+The next update we'll update the Game module, using sets instead of
+lists to store game elements.  This will involve changes and renaming
+of the BuildDeck and other commands.

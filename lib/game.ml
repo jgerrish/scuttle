@@ -13,7 +13,7 @@ module Game =
     type game_element =
       Deck of Deck.deck
     | Players of player list
-    
+
     (** [game] A game list contains information about a game *)
     type game = game_element list
     (* { deck: Deck.deck; players: players } *)

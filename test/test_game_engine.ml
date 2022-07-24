@@ -25,4 +25,17 @@ module Test_game_engine =
          let clubs_filter (card : Card.card) = (card.suit = Card.Clubs) in
          Tester.assert_equal (=) (List.length (List.filter clubs_filter x)) 12
       | Players _ -> Tester.assert_failure "Expected deck"
+
+
+    (** [test_game_engine_builddeck_standard_shuffle]
+        Test building a standard deck and shuffling *)
+    let test_game_engine_builddeck_standard_shuffle =
+      let game = Game_engine.eval
+                   (Game_engine.BuildDeck
+                      (Game_engine.Shuffle (Game_engine.Standard))) in
+      match (List.hd game) with
+        Deck x ->
+         Tester.assert_equal (=) (List.length x) 52
+      | Players _ -> Tester.assert_failure "Expected deck"
+
   end

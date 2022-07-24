@@ -23,12 +23,16 @@ at the prompt:
 
 builddeck standard;;
 
-or type the following:
+or type the following to remove one card of suit Hearts.
 
 builddeck standard remove hearts;;
 
-It will lex the string, parse it, evaluate the parsed expression, build the
-deck and write it as a string.
+This builds a standard deck and then shuffles it.
+
+builddeck standard shuffle;;
+
+It will lex the string, parse it, evaluate the parsed expression,
+build the deck and write it as a string.
 
 
 # Dune #
