@@ -25,12 +25,21 @@ module Card :
     type card = { suit : card_suit; rank : card_rank; }
     (** A card is a record of a card_suit and card_rank *)
 
-    val card_suit_to_str : card_suit -> string
-    (** [card_suit_to_str card_suit] Convert a card_suit type to a string *)
+    val card_suit_to_string : card_suit -> string
+    (** [card_suit_to_string card_suit] Convert a card_suit type to a string *)
 
-    val card_rank_to_str : card_rank -> string
-    (** [card_rank_to_str card_rank] Convert a card_rank type to a string *)
+    val card_rank_to_string : card_rank -> string
+    (** [card_rank_to_string card_rank] Convert a card_rank type to a string *)
 
-    val card_to_str : card -> string
-    (** [card_to_str card] Convert a card type to a string *)
+    val card_to_string : card -> string
+    (** [card_to_string card] Convert a card type to a string *)
+
+    val pp_card_suit : Format.formatter -> card_suit -> unit
+    (** [pp_card_suit formatter card_suit] Pretty print a card suit using a formatter *)
+
+    val pp_card_rank : Format.formatter -> card_rank -> unit
+    (** [pp_card_rank formatter card_rank] Pretty print a card rank using a formatter *)
+
+    val pp_card : Format.formatter -> card -> unit
+    (** [pp_card formatter card] Pretty print a card using a formatter *)
   end

@@ -66,7 +66,7 @@ module Deck =
       let cards_with_suit = List.filter (comparator card_suit) card_deck in
       let random_card = List.nth cards_with_suit (Random.int (List.length cards_with_suit)) in
       remove_card card_deck random_card
-    
+
     (** Copied from rosettacode.org *)
     let cart_prod l1 l2 =
       List.fold_left (fun acc1 ele1 ->
@@ -78,9 +78,16 @@ module Deck =
       let pairs_to_card pair = { Card.suit = fst pair; Card.rank = snd pair } in
       List.map pairs_to_card (List.rev pairs)
 
-    (** [deck_to_str deck] Convert a deck to a string *)
-    let deck_to_str deck =
-      String.concat ", " (List.map Card.card_to_str deck)
+    (** [pp_deck formatter deck] Pretty print a deck using a formatter *)
+    let pp_deck formatter deck =
+      Format.fprintf formatter "%a"
+        (Format.pp_print_list
+           ~pp_sep:(fun fmt () -> Format.fprintf fmt ",@ ")
+           Card.pp_card) deck
+
+    (** [deck_to_string deck] Convert a deck to a string *)
+    let deck_to_string deck =
+      String.concat ", " (List.map Card.card_to_string deck)
 
     (** Define a standard deck for convenience *)
     let standard_deck =

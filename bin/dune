@@ -3,3 +3,11 @@
  (package scuttle)
  (name main)
  (libraries scuttle scuttleParser))
+
+;; An executable exploring different pretty printing options and how
+;; to use them
+(executable
+ (public_name exploring_pretty_printers)
+ (package scuttle)
+ (name exploring_pretty_printers)
+ (libraries scuttle))

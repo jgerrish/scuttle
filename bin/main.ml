@@ -10,8 +10,8 @@ let parse () =
     let lexbuf = Lexing.from_channel stdin in
     Printf.printf "Parsing\n";
     let result = toplevel token lexbuf in
-    print_string (Game.game_to_str (Game_engine.eval result));
-    print_newline();
+    let ppf = Format.std_formatter in
+    Format.fprintf ppf "%a\n" Game.pp_game (Game_engine.eval result)
   with Eof ->
     exit 0
 

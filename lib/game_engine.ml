@@ -18,36 +18,51 @@ module Game_engine =
       | Remove of Card.card_suit * deck_command
       | Shuffle of deck_command
 
-    (** [deck_command_to_str deck_command] Convert a deck_command to a string *)
-    let rec deck_command_to_str card_deck =
-      match card_deck with
+    (** [deck_command_to_string deck_command] Convert a deck_command to a string *)
+    let rec deck_command_to_string cmd =
+      match cmd with
       | Standard -> "standard"
       | Remove (card_suit, deck) ->
          "remove "
-         ^ (Card.card_suit_to_str card_suit)
-         ^ (deck_command_to_str deck)
-      | Shuffle (deck) -> "shuffle " ^ (deck_command_to_str deck)
+         ^ (Card.card_suit_to_string card_suit)
+         ^ (deck_command_to_string deck)
+      | Shuffle (deck) -> "shuffle " ^ (deck_command_to_string deck)
 
     (** [game_command] Commands that are used to build games *)
     type game_command =
       | []
       | BuildDeck of deck_command
 
-    (** [game_command_to_str game_command] Convert a game_command to a string *)
-    let game_command_to_str command =
+    (** [pp_game_command printer game_command] Pretty print a game command to an output channel *)
+    let pp_game_command printer command =
+      let s = match command with
+      | [] -> ""
+      (* ^ is string concatenation *)
+      | BuildDeck (deck) -> "builddeck " ^ (deck_command_to_string deck) in
+      (* | Shuffle (deck) -> "shuffle " *)
+      (*    ^ (deck_command_to_string deck) *)
+      Printf.fprintf printer "%s" s
+
+    (** [game_command_to_string game_command] Convert a game_command to a string *)
+    let game_command_to_string command =
       match command with
       | [] -> ""
       (* ^ is string concatenation *)
-      | BuildDeck (deck) -> "builddeck " ^ (deck_command_to_str deck)
+      | BuildDeck (deck) -> "builddeck " ^ (deck_command_to_string deck)
       (* | Shuffle (deck) -> "shuffle " *)
-      (*    ^ (deck_command_to_str deck) *)
+      (*    ^ (deck_command_to_string deck) *)
     
     (** [game_commands] A list of game commands *)
     type game_commands = game_command list
 
-    (** [game_commands_to_str game_commands] Convert game_commands to a string *)
-    let game_commands_to_str commands =
-      String.concat ", " (List.map game_command_to_str commands)
+    (** [pp_game_commands printer game_commands] Pretty print game commands to an output channel *)
+    let pp_game_commands printer commands =
+      let s = String.concat ", " (List.map game_command_to_string commands) in
+      Printf.fprintf printer "%s" s
+
+    (** [game_commands_to_string game_commands] Convert game_commands to a string *)
+    let game_commands_to_string commands =
+      String.concat ", " (List.map game_command_to_string commands)
 
     (** [eval_deck deck_command] Evaluate a deck_command, returning a deck of cards *)
     let rec eval_deck deck_command : Deck.deck =

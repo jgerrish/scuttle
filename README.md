@@ -35,6 +35,17 @@ It will lex the string, parse it, evaluate the parsed expression,
 build the deck and write it as a string.
 
 
+# Examples #
+
+There is an example showing how to use the Scuttle package and
+exploring pretty printing options in OCaML.  It is called
+[bin/exploring\_pretty\_printers](bin/exploring\_pretty\_printers).
+
+To execute it, run:
+
+$ dune exec exploring\_pretty\_printers
+
+
 # Dune #
 
 The project was initialized with:

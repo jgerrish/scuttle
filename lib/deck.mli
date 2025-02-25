@@ -35,8 +35,11 @@ module Deck :
     val generate_standard_deck : deck
     (** [generate_standard_deck] Generate a standard deck *)
 
-    val deck_to_str : deck -> string
-    (** [deck_to_str deck] Convert a deck to a string *)
+    val pp_deck : Format.formatter -> deck -> unit
+    (** [pp_deck formatter deck] Pretty print a deck to an output channel *)
+
+    val deck_to_string : deck -> string
+    (** [deck_to_string deck] Convert a deck to a string *)
 
     val standard_deck : deck
     (** [standard_deck] A standard deck of cards *)
